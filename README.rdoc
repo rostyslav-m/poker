@@ -1,0 +1,15 @@
+# Simple app for poker tables reservation
+
+#### Run these commands to try it out.
+
+    `bundle install`
+
+    `rake db:create`
+
+    `rake db:migrate`
+
+    `rake db:seed`
+
+    `rails s`
+
+    It's work! :)

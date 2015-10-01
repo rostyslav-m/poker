@@ -1,0 +1,36 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+
+  <strong>Actual tables:</strong>
+  <div class="field">
+  <%= hidden_field_tag("user[table_ids][]", nil) %>
+    <% Table.all.each do |table| %>
+      <label>
+      <% if table.actual %>
+      <li><%= check_box_tag "user[table_ids][]", table.id, @user.table_ids.include?(table.id) %> <%= table.time.try(:strftime, '%B %e, %Y  on  %H:%M') %> on <%= link_to table.tabname, table_path(table) %>  table</li></label>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "OK" %>
+  </div>
+
+  <%= link_to 'or create new table befor', root_path %>
+
+<% end %>

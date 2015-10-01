@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Tables</h1>
+
+<%= Time.now %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tabname</th>
+      <th>Time</th>
+      <th>User count</th>
+      <th>Is the table actual?</th>
+      <th>Playing user</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tables.each do |table| %>
+      <tr>
+        <td><%= link_to table.tabname, table_path(table) %></td>
+        <td><%= table.time.try(:strftime, '%B %e, %Y  on  %H:%M') %></td>
+        <td><%= table.userscount %></td>
+        <td><%= table.actual ? "Table is actual" : "Table isn't actual" %></td>
+        <td>
+          <% table.users.each do |user| %>
+            <%= link_to user.email, user_path(user) %>  
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', table %></td>
+        <td><%= link_to 'Edit', edit_table_path(table) %></td>
+        <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Table', new_table_path %>

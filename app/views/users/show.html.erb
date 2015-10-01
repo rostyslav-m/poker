@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Subscribed on tables:</strong>
+  <% @user.tables.each do |tab| %>
+    <li><%= tab.time.try(:strftime, '%B %e, %Y  on  %H:%M') %> on <%= link_to tab.tabname, table_path(tab) %>  table</li>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
